@@ -1,22 +1,19 @@
-// requerimos dotenv para acceder a nuestro .env
+const path = require("path");
+// Requerimos dotenv para acceder a nuestro .env
 require("dotenv").config();
 
-//inicializamos nuestra app express
+// Requerimos express para utilizarlo
 const express = require("express");
 
-//comenzamos a escuchar con nuestro servidor
+// Inicializamos nuestra aplicación express
 const app = express();
 
-//creamos nuestro primer get
-app.get("/home", (req, res)=> {
-    res.send("Mi primer servidor");
-})
+// Nuestra primer ruta
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "views/home.html"));
+});
 
-//exportamos nuestra app para aplicarla como modulo
-app.listen(
-    process.env.PORT, () => {
-        console.log("Server listening on port " + process.env.PORT)
-    }
-);
-
-module.exports = app;
+// Comenzamos a escuchar con nuestro servidor
+app.listen(process.env.PORT, () => {
+  console.log("Server listening on Port: ", process.env.PORT);
+});
